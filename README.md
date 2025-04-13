@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# 📞 Call Summary AI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Call Summary AI is a web app that allows users to upload `.mp3` voice notes or call recordings, transcribe them using AI, and receive a concise summary. Useful for WhatsApp voice notes, call recordings, or meetings.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📁 Project Structure
 
-### `npm start`
+call_summary_ai_project/
+├── frontend/               # React frontend  
+│   ├── public/  
+│   └── src/  
+│       ├── App.js  
+│       ├── CallSummary.js  
+│       └── ...  
+├── backend/                # Flask backend  
+│   ├── app.py  
+│   └── requirements.txt  
+└── README.md
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ Prerequisites
 
-### `npm test`
+- Node.js (for frontend)
+- Python 3.9+ (for backend)
+- (Optional) FFmpeg for audio conversion
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## ⚛️ Frontend Setup (React)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Go to the frontend directory:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   cd frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
 
-### `npm run eject`
+   npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Start the development server:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+App runs at http://localhost:3000
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🐍 Backend Setup (Flask)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Go to the backend directory:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   cd backend
 
-### Code Splitting
+2. (Optional) Create virtual environment:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   python -m venv venv  
+   venv\Scripts\activate  (Windows)  
+   source venv/bin/activate  (Mac/Linux)
 
-### Analyzing the Bundle Size
+3. Install requirements:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   pip install -r requirements.txt
 
-### Making a Progressive Web App
+4. Run the server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   python app.py
 
-### Advanced Configuration
+Backend runs at http://localhost:5000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🔗 API Call (Frontend → Backend)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+fetch("http://localhost:5000/summarize", {
+  method: "POST",
+  body: formData
+});
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📦 Example `requirements.txt`
+
+Flask  
+Flask-CORS  
+openai  
+whisper
+
+---
+
+## ⚠️ Troubleshooting
+
+| Problem                  | Fix |
+|--------------------------|------------------------------|
+| "Something went wrong"   | Check if backend is running  |
+| CORS error               | Use Flask-CORS               |
+| File upload fails        | Check `formData` setup       |
+| `Module not found`       | Fix import paths or file names |
+
+---
+
+## 🚧 TODO
+
+- [ ] Show transcription before summary  
+- [ ] Add loader during processing  
+- [ ] Deploy to Vercel + Render  
+- [ ] Support other audio formats
+
+
